@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_tech_order_tech_order,tech_order.tech_order,model_tech_order_tech_order,base.group_user,1,1,1,1
+access_order_meal_user,access_order_meal_user,model_order_meal,,1,1,1,1
