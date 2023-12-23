@@ -1,6 +1,39 @@
 <odoo>
     <data>
+<!--        meal.category-->
+        <record id="order_meal_category_form_view" model="ir.ui.view">
+            <field name="name">order.meal.category.form.view</field>
+            <field name="model">order.meal.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <record id="order_meal_category_tree_view" model="ir.ui.view">
+            <field name="name">order.meal.category.tree.view</field>
+            <field name="model">order.meal.category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="order_meal_category_window_action" model="ir.actions.act_window">
+                <field name="name">Meal Category</field>
+                <field name="res_model">order.meal.category</field>
+                <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        meal-->
         <record id="order_meal_form_view" model="ir.ui.view">
             <field name="name">order.meal.for.view</field>
             <field name="model">order.meal</field>
@@ -12,6 +45,7 @@
                                 <field name="name"/>
                             </group>
                             <group>
+                                <field name="category_id"/>
                                 <field name="price"/>
                             </group>
                         </group>
@@ -20,20 +54,36 @@
             </field>
         </record>
 
-
-         <record id="order_meal_window_action" model="ir.actions.act_window">
-                <field name="name">Meal</field>
-                <field name="res_model">order.meal</field>
-                <field name="view_mode">tree,form</field>
+        <record id="order_meal_tree_view" model="ir.ui.view">
+            <field name="name">order.meal.for.view</field>
+            <field name="model">order.meal</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
         </record>
+
+        <record id="order_meal_window_action" model="ir.actions.act_window">
+            <field name="name">Meal</field>
+            <field name="res_model">order.meal</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
 <!--        menuitem == <record id="...." model="ir.ui.menuitem">-->
-         <menuitem name="Orders" id="order_base_menu"
+        <menuitem name="Orders" id="order_base_menu"
                   web_icon="tech_order,static/src/img/icon.png"/>
         <menuitem name="Meals" id="order_base_meal_menu"
-                  parent="tech_order.order_base_menu"/>
+                  parent="tech_order.order_base_menu"
+                  sequence="10"/>
+
         <menuitem name="Meals" id="order_meal_menu"
                   parent="tech_order.order_base_meal_menu"
-        action="tech_order.order_meal_window_action"/>
-
+                  action="tech_order.order_meal_window_action"
+                  sequence="20"/>
+        <menuitem name="Meal Category" id="order_meal_category_menu"
+                  parent="tech_order.order_base_meal_menu"
+                  action="tech_order.order_meal_category_window_action"
+                  sequence="10"/>
     </data>
 </odoo>

@@ -19,4 +19,3 @@
 #         return http.request.render('tech_order.object', {
 #             'object': obj
 #         })
-
