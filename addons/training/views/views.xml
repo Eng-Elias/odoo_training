@@ -1,0 +1,144 @@
+<odoo>
+  <data>
+    <!--        training.material        -->
+    <record id="training_material_form_view" model="ir.ui.view">
+        <field name="name">training.material.form.view</field>
+        <field name="model">training.material</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="training_material_tree_view" model="ir.ui.view">
+        <field name="name">training.material.tree.view</field>
+        <field name="model">training.material</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="training_material_window_action" model="ir.actions.act_window">
+            <field name="name">Material</field>
+            <field name="res_model">training.material</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--        training course        -->
+    <record id="training_course_form_view" model="ir.ui.view">
+        <field name="name">training.course.form.view</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                        <group>
+                            <field name="num_of_students"/>
+                            <field name="material_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="training_course_tree_view" model="ir.ui.view">
+        <field name="name">training.course.tree.view</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="num_of_students"/>
+                <field name="material_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="training_course_window_action" model="ir.actions.act_window">
+            <field name="name">Course</field>
+            <field name="res_model">training.course</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+<!--        menu items      -->
+    <menuitem name="Training" id="training_base_menu"/>
+    <menuitem name="Materials" id="materials_menu"
+              parent="training.training_base_menu"
+              action="training.training_material_window_action"
+              sequence="2"/>
+    <menuitem name="Courses" id="courses_menu"
+              parent="training.training_base_menu"
+              action="training.training_course_window_action"
+              sequence="1"/>
+
+
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="training.list">
+      <field name="name">training list</field>
+      <field name="model">training.training</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="training.action_window">
+      <field name="name">training window</field>
+      <field name="res_model">training.training</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="training.action_server">
+      <field name="name">training server</field>
+      <field name="model_id" ref="model_training_training"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="training" id="training.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="training.menu_1" parent="training.menu_root"/>
+    <menuitem name="Menu 2" id="training.menu_2" parent="training.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="training.menu_1_list" parent="training.menu_1"
+              action="training.action_window"/>
+    <menuitem name="Server to list" id="training" parent="training.menu_2"
+              action="training.action_server"/>
+-->
+  </data>
+</odoo>
