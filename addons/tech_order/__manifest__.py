@@ -19,12 +19,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'product'],
 
     # always loaded
     'data': [
             'security/ir.model.access.csv',
             'views/meal.xml',
+            'views/order.xml',
+            'views/meal_ingredient.xml',
+            'views/order_item.xml',
     ],
 
     # only loaded in demonstration mode

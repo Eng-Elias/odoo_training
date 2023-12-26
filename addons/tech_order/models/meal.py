@@ -1,8 +1,8 @@
 from odoo import fields, models
 
 
-class OrderCategory(models.Model):
-    _name = "order.meal.category"
+class OrderMealCategory(models.Model):
+    _name = 'order.meal.category'
     _description = "Order Meal Category"
 
     name = fields.Char("Name", required=True)
@@ -16,3 +16,4 @@ class Meal(models.Model):
     price = fields.Float("Price", required=True)
     # ondelete = restrict | cascade | set null | no action | set default
     category_id = fields.Many2one('order.meal.category', string="Category", ondelete="cascade")
+    ingredient_ids = fields.One2many('meal.ingredient', 'meal_id', string="Ingredient")

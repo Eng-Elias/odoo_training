@@ -1,0 +1,64 @@
+<templates>
+   <t t-name="MealCustomerFeedbackTemplate">
+       <div>
+           <div>
+               <center><h3>
+                   FeedBack Report
+               </h3></center>
+           </div>
+           <br></br>
+           <div>
+               <div class="table_view"></div>
+           </div>
+       </div>
+   </t>
+   <t t-name="FeedBackTable">
+       <div>
+           <div >
+               <t t-foreach="report_lines" t-as="report_line">
+                   <div class="row">
+                        <div style="folat:left;width:50.00%">
+                            <strong t-esc="report_line['customer_name']"/>
+                        </div>
+                        <div style="folat:left;width:50.00%">
+                            <strong t-esc="report_line['customer_rank']"/>
+                        </div>
+                   </div>
+                   <table class="table table-bordered">
+                       <thead>
+                           <tr>
+                               <th>Name</th>
+                               <th>Meal Name</th>
+                               <th>Meal Price</th>
+                               <th>Status</th>
+                               <th>Rate</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <t t-foreach="report_line['lines']" t-as="line">
+                               <tr>
+                                   <td>
+                                       <t t-esc="line['name']"/>
+                                   </td>
+                                   <td>
+                                       <t t-esc="line['meal_name']"/>
+                                   </td>
+                                   <td>
+                                       <t t-esc="line['meal_price']"/>
+                                   </td>
+                                   <td>
+                                       <t t-esc="line['state']"/>
+                                   </td>
+                                   <td>
+                                       <t t-esc="line['rate']"/>
+                                   </td>
+                               </tr>
+                           </t>
+                       </tbody>
+                   </table>
+                   <hr/>
+               </t>
+           </div>
+       </div>
+   </t>
+</templates>
