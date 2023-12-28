@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class OrderItem(models.Model):
@@ -9,3 +10,22 @@ class OrderItem(models.Model):
     total_price = fields.Float(string='Total Price')
     quantity = fields.Float(string="Quantity")
     price = fields.Float("Price")
+    order_id = fields.Many2one('meal.order', string="Order")
+
+    # @api.onchange('price', 'quantity')
+    # def set_total_price(self):
+    #     self.total_price = self.price * self.quantity
+
+    @api.onchange('meal_id')
+    def set_price(self):
+        self.price = self.meal_id.price
+
+    @api.constrains('price')
+    def check_price(self):
+        for record in self:
+            if record.price <= 0:
+                raise ValidationError('Price cannot be zero 🤦‍♂️')
+
+
+
+

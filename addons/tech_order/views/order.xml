@@ -26,9 +26,48 @@
                                 <field name="order_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Items">
+                                <field name="item_ids">
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="meal_id" />
+                                                    <field name="quantity" />
+                                                </group>
+                                                <group>
+                                                    <field name="total_price" />
+                                                    <field name="price" />
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    <tree>
+                                        <field name="meal_id" />
+                                        <field name="quantity" />
+
+                                        <field name="price" />
+                                        <field name="total_price" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
 
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record id="meal_order_search_view" model="ir.ui.view">
+            <field name="name">meal.order.search.view</field>
+            <field name="model">meal.order</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="type"/>
+                    <field name="customer_id" filter_domain="[('customer_id.display_name', 'ilike', self)]"/>
+
+                </search>
             </field>
         </record>
 
