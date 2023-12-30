@@ -8,8 +8,8 @@
                 <form>
                     <header>
                         <button string="Confirm" name="action_confirm" type="object" class="btn-primary"
-                        invisible="state != 'draft'"
-                        ></button>
+                                invisible="state != 'draft'"
+                        />
                         <button name="action_in_process" type="object" string="Start Order Processing" class="btn-primary"
                         invisible="state != 'confirmed'"/>
                         <button string="Mark as Delivered" type="object" name="action_delivered" class="btn-primary"
