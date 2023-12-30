@@ -10,13 +10,29 @@ class Material(models.Model):
     name = fields.Char("Name", required=True)
 
 
+class Teacher(models.Model):
+    _name = "training.teacher"
+    _description = "Teacher"
+
+    name = fields.Char("Teacher", required=True)
+
+
 class Course(models.Model):
     _name = "training.course"
     _description = "Training Course"
 
     name = fields.Char("Name", required=True)
     num_of_students = fields.Integer("Number of Students")
-    material_id = fields.Many2one("training.material", string="Material", ondelete="set null")
+    material_ids = fields.Many2many("training.material", string="Materials")
+    active = fields.Boolean(default=True)
+    start_date = fields.Date("Start Date")
+    end_date = fields.Date("End Date")
+    duration = fields.Float("Duration")
+    type = fields.Selection(
+        [('online', 'Online'), ('onsite', 'Onsite')],
+        string="Type"
+    )
+    responsible = fields.Many2one("training.teacher", string="Teacher", ondelete="set null")
 
 
 # class training(models.Model):
