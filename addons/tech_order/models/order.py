@@ -9,7 +9,7 @@ class MealOrder(models.Model):
     _order = 'name'
 
     name = fields.Char("Name", copy=False)
-    type = fields.Selection([('internal','Internal'), ('external', 'External')],
+    type = fields.Selection([('internal', 'Internal'), ('external', 'External')],
                             string="Type", default="internal")
 
     order_date = fields.Date("Order Date", readonly=True, default=fields.datetime.now().date())
@@ -26,6 +26,14 @@ class MealOrder(models.Model):
     # order_tag_ids = fields.Many2many('order.tag',
     #                                  relation="Tags", column1='order', column2='tag')
 
+    state = fields.Selection([('draft', 'Draft'),
+                              ('confirmed', 'Confirmed'),
+                              ('in_process', 'In Process'),
+                              ('delivered', 'Delivered'),
+                              ('cancelled', 'Cancelled'),
+                              ],
+                             string="State", default='draft')
+
     _sql_constraints = [
             ('unique_name', 'unique (name)', 'Order Name already exists!'),
             ]
@@ -34,3 +42,21 @@ class MealOrder(models.Model):
     def check_order_date(self):
         if self.order_date and self.order_date > datetime.now().date():
             raise ValidationError("Order Date Must be in present or past")
+
+    def action_confirm(self):
+        self.state = 'confirmed'
+
+    def action_in_process(self):
+        self.state = 'in_process'
+
+    def action_delivered(self):
+        self.state = 'delivered'
+
+    def action_cancelled(self):
+        self.state = 'cancelled'
+
+
+        #Draft --> Confirm, Cancel
+        #Confirm --> In Process, Cancel
+        #In Process --> Delivered
+        #Delivered --> X
