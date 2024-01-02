@@ -92,6 +92,29 @@
         </field>
     </record>
 
+    <record id="training_course_search_view" model="ir.ui.view">
+        <field name="name">training.course.search.view</field>
+        <field name="model">training.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="type"/>
+                <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+
+                <filter name="type_online" string="Online" domain="[('type', '=', 'online')]"/>
+                <filter name="type_onsite" string="Onsite" domain="[('type', '=', 'onsite')]"/>
+                <separator/>
+                <filter name="start_today_course" string="Courses Start Today" domain="[('start_date', '=', time.strftime('%Y-%m-%d'))]"/>
+                <filter name="end_today_course" string="Courses End Today" domain="[('end_date', '=', time.strftime('%Y-%m-%d'))]"/>
+                <group name="group_by" string="Group By">
+                    <filter name="type" string="Type" context="{'group_by': 'type'}"/>
+                    <filter name="responsible" string="Responsible" context="{'group_by': 'responsible'}"/>
+                    <filter name="start_date" string="Start Date" context="{'group_by': 'start_date'}"/>
+                    <filter name="end_date" string="End Date" context="{'group_by': 'end_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="training_course_tree_view" model="ir.ui.view">
         <field name="name">training.course.tree.view</field>
         <field name="model">training.course</field>

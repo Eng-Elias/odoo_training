@@ -23,7 +23,7 @@ class Course(models.Model):
 
     name = fields.Char("Name", required=True)
     num_of_students = fields.Integer("Number of Students")
-    material_ids = fields.Many2many("training.material", string="Materials")
+    material_ids = fields.Many2many("training.material", column1="course_id", column2="material_id", string="Materials")
     active = fields.Boolean(default=True)
     start_date = fields.Date("Start Date")
     end_date = fields.Date("End Date")
