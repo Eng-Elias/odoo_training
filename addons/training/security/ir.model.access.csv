@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_training_material_user,access_training_material_user,model_training_material,,1,1,1,1
 access_training_course_user,access_training_course_user,model_training_course,,1,1,1,1
 access_training_teacher_user,access_training_teacher_user,model_training_teacher,,1,1,1,1
+access_training_session_user,access_session_teacher_user,model_training_session,,1,1,1,1

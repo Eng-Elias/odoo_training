@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class Material(models.Model):
@@ -33,6 +35,17 @@ class Course(models.Model):
         string="Type"
     )
     responsible = fields.Many2one("training.teacher", string="Teacher", ondelete="set null")
+    sessions_ids = fields.One2many("training.session", "course_id", "Course Sessions")
+
+
+class Session(models.Model):
+    _name = "training.session"
+    _description = "Training Session"
+
+    name = fields.Char("Name")
+    planned_date = fields.Date("Planned Date")
+    actual_date = fields.Date("Actual Date")
+    course_id = fields.Many2one("training.course", "Course")
 
 
 # class training(models.Model):
