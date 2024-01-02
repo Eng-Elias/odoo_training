@@ -47,6 +47,12 @@ class Session(models.Model):
     actual_date = fields.Date("Actual Date")
     course_id = fields.Many2one("training.course", "Course")
 
+    @api.constrains('planned_date', 'actual_date')
+    def check_session_dates(self):
+        for record in self:
+            if record.planned_date and record.actual_date and record.actual_date < record.planned_date:
+                raise ValidationError("Actual Date must be equal to or after Planned Date")
+
 
 # class training(models.Model):
 #     _name = 'training.training'
