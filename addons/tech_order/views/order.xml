@@ -7,6 +7,8 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
+<!--                        before Odoo17-->
+<!--                        attrs="{'invisible': [('state', '!=', 'draft')]}"-->
                         <button string="Confirm" name="action_confirm" type="object" class="btn-primary"
                                 invisible="state != 'draft'"
                         />
