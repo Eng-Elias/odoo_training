@@ -9,6 +9,9 @@
                     <header>
 <!--                        before Odoo17-->
 <!--                        attrs="{'invisible': [('state', '!=', 'draft')]}"-->
+
+<!--                        button of type "object" calls python method-->
+
                         <button string="Confirm" name="action_confirm" type="object" class="btn-primary"
                                 invisible="state != 'draft'"
                         />
