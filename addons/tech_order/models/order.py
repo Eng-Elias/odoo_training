@@ -13,6 +13,7 @@ class MealOrder(models.Model):
                             string="Type", default="internal")
 
     order_date = fields.Date("Order Date", readonly=True, default=fields.datetime.now().date())
+    expected_date = fields.Date("Expected Date", compute="_compute_expected_date")
     total_price = fields.Float(string="Total Price", readonly=True, default=0)
     note = fields.Text("Note")
     expected_duration = fields.Float("Expected Duration")
@@ -54,6 +55,11 @@ class MealOrder(models.Model):
 
     def action_cancelled(self):
         self.state = 'cancelled'
+
+    @api.depends("order_date", "expected_duration")
+    def _compute_expected_date(self):
+        for record in self:
+            record.expected_date = record.order_date + timedelta(days=record.expected_duration)
 
 
         #Draft --> Confirm, Cancel
