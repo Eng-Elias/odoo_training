@@ -13,7 +13,6 @@ class MealOrder(models.Model):
                             string="Type", default="internal")
 
     order_date = fields.Date("Order Date", readonly=True, default=fields.datetime.now().date())
-    expected_date = fields.Date("Expected Date", compute="_compute_expected_date")
     total_price = fields.Float(string="Total Price", readonly=True, default=0)
     note = fields.Text("Note")
     expected_duration = fields.Float("Expected Duration")
@@ -23,6 +22,12 @@ class MealOrder(models.Model):
     active = fields.Boolean(default=True)
     order_tag_ids = fields.Many2many('order.tag', "Tags")
     item_ids = fields.One2many('order.item', 'order_id', string="Items")
+    expected_date = fields.Datetime("Expected Date", compute="_compute_expected_date",
+                                    inverse="inverse_expected_date", readonly=False)
+    external_item_ids = fields.Many2many('external.item', string="External Item",
+                                         readonly=True)
+    #readonly=True, copy=False, store=False, required=False
+    # readonly=False, copy=True, store=True, required=False
 
     # order_tag_ids = fields.Many2many('order.tag',
     #                                  relation="Tags", column1='order', column2='tag')
@@ -38,6 +43,18 @@ class MealOrder(models.Model):
     _sql_constraints = [
             ('unique_name', 'unique (name)', 'Order Name already exists!'),
             ]
+
+    @api.depends('order_date', 'expected_duration')
+    def _compute_expected_date(self):
+        for record in self:
+            record.expected_date = timedelta(days=0)
+            if record.order_date and record.expected_duration:
+                record.expected_date = record.order_date + timedelta(days=record.expected_duration)
+
+    def inverse_expected_date(self):
+        for record in self:
+            record.expected_duration = (record.expected_date.date() - record.order_date).days
+
 
     @api.constrains('order_date')
     def check_order_date(self):
@@ -55,12 +72,6 @@ class MealOrder(models.Model):
 
     def action_cancelled(self):
         self.state = 'cancelled'
-
-    @api.depends("order_date", "expected_duration")
-    def _compute_expected_date(self):
-        for record in self:
-            if record.expected_date and record.expected_duration:
-                record.expected_date = record.order_date + timedelta(days=record.expected_duration)
 
 
         #Draft --> Confirm, Cancel

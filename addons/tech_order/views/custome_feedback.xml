@@ -21,6 +21,12 @@
                             class="btn-success" type="object"
                             invisible="state != 'new'"/>
 
+                    <button name="%(tech_order.feedback_reason_window)d" string="Reject"
+                    class="btn-danger" type="action"
+                    invisible="state != 'new'"/>
+
+
+
 
                 </tree>
             </field>

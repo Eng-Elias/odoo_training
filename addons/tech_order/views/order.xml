@@ -70,6 +70,14 @@
                                     </tree>
                                 </field>
                             </page>
+                            <page string="External Item">
+                                <field name="external_item_ids">
+                                    <tree>
+                                        <field name="product_id"/>
+                                    </tree>
+                                </field>
+
+                            </page>
                         </notebook>
 
                     </sheet>

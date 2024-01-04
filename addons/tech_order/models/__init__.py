@@ -9,3 +9,4 @@ from . import order_tag
 from . import meal_ingredient
 from . import order_item
 from . import custome_feedback
+from . import external_item

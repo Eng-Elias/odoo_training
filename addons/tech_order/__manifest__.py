@@ -25,10 +25,12 @@
     'data': [
             'security/ir.model.access.csv',
             'views/meal.xml',
+            'wizard/feedback_reason.xml',
             'views/order.xml',
             'views/meal_ingredient.xml',
             'views/order_item.xml',
             'views/custome_feedback.xml',
+
     ],
 
     # only loaded in demonstration mode
