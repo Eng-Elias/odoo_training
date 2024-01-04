@@ -31,8 +31,10 @@
                             <group>
                                 <field name="customer_id"/>
                                 <field name="type"/>
-                                <field name="is_urgent"/>
-                                <field name="table_number"/>
+                                <field name="is_urgent" invisible="0"/>
+                                <field name="table_number"
+                                       invisible="type != 'internal'"
+                                       required="type == 'external'"/>
                             </group>
                             <group>
                                 <field name="note"/>
@@ -69,6 +71,7 @@
                                 </field>
                             </page>
                         </notebook>
+
                     </sheet>
                 </form>
             </field>
@@ -101,12 +104,21 @@
              <field name="name">meal.order.tree.view</field>
             <field name="model">meal.order</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree
+                      decoration-success="state == 'delivered'"
+                      decoration-info="state == 'confirmed'"
+                      decoration-danger="state == 'cancelled'"
+                      decoration-warning="state == 'in_process'"
+                >
                         <field name="name"/>
                         <field name="customer_id"/>
                         <field name="type"/>
                         <field name="order_date"/>
                         <field name="expected_date"/>
+                        <field name="state" optional="show" widget="badge"
+                           decoration-success="state in ('delivered', 'confirmed', 'in_process')"
+                           decoration-danger="state == 'cancelled'"
+                           decoration-muted="state == 'draft'"/>
                 </tree>
             </field>
         </record>

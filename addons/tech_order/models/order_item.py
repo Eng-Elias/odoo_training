@@ -7,7 +7,7 @@ class OrderItem(models.Model):
     _description = 'Order Item'
 
     meal_id = fields.Many2one('order.meal', string="Meal", ondelete="restrict")  # restrict
-    total_price = fields.Float(string='Total Price')
+    total_price = fields.Float(string='Total Price', compute="_compute_total_price")
     quantity = fields.Float(string="Quantity")
     price = fields.Float("Price")
     order_id = fields.Many2one('meal.order', string="Order")
@@ -25,6 +25,14 @@ class OrderItem(models.Model):
         for record in self:
             if record.price <= 0:
                 raise ValidationError('Price cannot be zero 🤦‍♂️')
+
+    @api.depends('quantity', 'price')
+    def _compute_total_price(self):
+        for record in self:
+            record.total_price = 0
+            if record.price:
+                record.total_price = record.quantity * record.price
+
 
 
 
