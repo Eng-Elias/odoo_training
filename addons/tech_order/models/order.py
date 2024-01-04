@@ -59,7 +59,8 @@ class MealOrder(models.Model):
     @api.depends("order_date", "expected_duration")
     def _compute_expected_date(self):
         for record in self:
-            record.expected_date = record.order_date + timedelta(days=record.expected_duration)
+            if record.expected_date and record.expected_duration:
+                record.expected_date = record.order_date + timedelta(days=record.expected_duration)
 
 
         #Draft --> Confirm, Cancel
