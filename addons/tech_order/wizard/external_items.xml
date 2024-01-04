@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="external_items_form_view" model="ir.ui.view">
+            <field name="name">external.items.view.form</field>
+            <field name="model">external.items</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="external_item_ids"/>
+                    </group>
+                    <footer>
+                        <button name="add_external_items" string="Add" type="object" class="oe_highlight"/>
+                        <button string='Close' class='btn-default' special='cancel'/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="external_items_window">
+            <field name="name">External Items</field>
+            <field name="res_model">external.items</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

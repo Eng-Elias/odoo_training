@@ -8,3 +8,4 @@ access_order_item_user,order_item_access,model_order_item,,1,1,1,1
 access_customer_feedback_user,customer_feedback_access,model_customer_feedback,,1,1,1,1
 access_feedback_reason_user,feedback_reason_access,model_feedback_reason,,1,1,1,1
 access_external_item_user,external_item_access,model_external_item,,1,1,1,1
+access_external_items_user,external_items_access,model_external_items,,1,1,1,1

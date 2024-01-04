@@ -24,6 +24,12 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_process,delivered"/>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="%(tech_order.external_items_window)d" string="Add External Items"
+                                class="oe_stat_button" icon="fa-pencil-square-o" type="action"/>
+
+                        </div>
                         <h1>
                             <field name="name"/>
                         </h1>
