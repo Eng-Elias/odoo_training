@@ -11,6 +11,7 @@ class OrderItem(models.Model):
     quantity = fields.Float(string="Quantity")
     price = fields.Float("Price")
     order_id = fields.Many2one('meal.order', string="Order")
+    state = fields.Selection(related='order_id.state', string="State", store=True)
 
     # @api.onchange('price', 'quantity')
     # def set_total_price(self):
@@ -32,6 +33,7 @@ class OrderItem(models.Model):
             record.total_price = 0
             if record.price:
                 record.total_price = record.quantity * record.price
+
 
 
 

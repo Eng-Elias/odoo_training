@@ -21,7 +21,11 @@
                          invisible="state != 'in_process'"/>
                         <button name="action_cancelled" string="Cancel" type="object" class="oe_highlight"
                         invisible="state not in ('draft', 'confirmed')"/>
+                          <button string="Add External Item" type="action" name="%(tech_order.external_item_wizard_window)d"
+                                class="btn-primary"
+                                invisible="state != 'confirmed' or type != 'external'"></button>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_process,delivered"/>
+
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -39,8 +43,8 @@
                                 <field name="type"/>
                                 <field name="is_urgent" invisible="0"/>
                                 <field name="table_number"
-                                       invisible="type != 'internal'"
-                                       required="type == 'external'"/>
+                                invisible="type != 'internal'"
+                                required="type == 'external'"/>
                             </group>
                             <group>
                                 <field name="note"/>
@@ -70,7 +74,7 @@
                                     <tree>
                                         <field name="meal_id" />
                                         <field name="quantity" />
-
+                                        <field name="state"/>
                                         <field name="price" />
                                         <field name="total_price" />
                                     </tree>

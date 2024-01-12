@@ -27,10 +27,12 @@
             'views/meal.xml',
             'wizard/feedback_reason.xml',
             'wizard/external_items.xml',
+            'wizard/add_external_item.xml',
             'views/order.xml',
             'views/meal_ingredient.xml',
             'views/order_item.xml',
             'views/custome_feedback.xml',
+            'data/server_action.xml',
 
     ],
 
