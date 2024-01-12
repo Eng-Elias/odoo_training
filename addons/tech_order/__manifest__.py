@@ -33,6 +33,7 @@
             'views/order_item.xml',
             'views/custome_feedback.xml',
             'data/server_action.xml',
+            'data/scheduale_action.xml',
 
     ],
 

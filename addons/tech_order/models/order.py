@@ -8,15 +8,19 @@ class MealOrder(models.Model):
     _description='Meal Order'
     _order = 'name'
 
+    def customer_domain(self):
+        customers = self.env['res.partner'].search([('is_company', '=', True)])
+        return [('id', 'in', customers.ids)]
+
     name = fields.Char("Name", copy=False)
     type = fields.Selection([('internal', 'Internal'), ('external', 'External')],
                             string="Type", default="internal")
 
-    order_date = fields.Date("Order Date", readonly=True, default=fields.datetime.now().date())
+    order_date = fields.Date("Order Date", readonly=False)#, default=fields.datetime.now().date()
     total_price = fields.Float(string="Total Price", readonly=True, default=0)
     note = fields.Text("Note")
     expected_duration = fields.Float("Expected Duration")
-    customer_id = fields.Many2one('res.partner', "Customer", ondelete='restrict')
+    customer_id = fields.Many2one('res.partner', "Customer", ondelete='restrict', domain=customer_domain)#[('is_company', '=', True)])
     table_number = fields.Integer("Table Number")
     is_urgent = fields.Boolean("Is Urgent", copy=False)
     active = fields.Boolean(default=True)
@@ -72,6 +76,54 @@ class MealOrder(models.Model):
 
     def action_cancelled(self):
         self.state = 'cancelled'
+
+    def check_urgent(self):
+        for order in self:
+            expected_date = order.expected_date.date() - timedelta(days=1)
+            if expected_date == datetime.now().date():
+                order.is_urgent = True
+
+    def fetch_order(self):
+        # user = self.env.user
+        # rec = self.env.ref('tech_order.model_meal_order')
+        # en = self.env
+        # raise ValidationError(str(user) + " " + str(rec) + " " + str(en))
+
+        # state in (confirmed, in_process)
+        # AND
+        # (
+        # external and expected_date > current date
+        # OR
+        # internal and table_umber == 0
+        # )
+        ########
+        orders = self.search([('state', 'in', ('confirmed', 'in_process')),
+                              '|', '&', ('type', '=', 'external'), ('expected_date', '<', datetime.now()),
+                              '&', ('type', '=', 'internal'), ('table_number', '=', 0)]) #, limit=3, order_by='id'
+        orders[0].unlink()
+        #######
+        # orders = orders.read(['name', 'type', 'customer_id'])
+        #######
+
+        orders = self.read_group(
+                [('state', 'in', ('confirmed', 'in_process')),
+                 '|', '&', ('type', '=', 'external'), ('expected_date', '<', datetime.now()),
+                 '&', ('type', '=', 'internal'), ('table_number', '=', 0)],
+                ['name', 'type', 'customer_id'],
+                ['type', 'customer_id'],
+                lazy=False
+                )
+
+        #To Do --> try search_count
+
+
+        #  offset=1
+        #  limit=1
+        # order = 'order_date ASC'
+        # orderby = 'order_date',
+        # count = True
+        #######
+        # raise ValidationError(str(orders))
 
 
         #Draft --> Confirm, Cancel

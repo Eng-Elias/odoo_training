@@ -61,9 +61,9 @@
                         <notebook>
                             <page string="Ingredient">
                                 <field name="ingredient_ids">
-                                    <tree>
+                                    <tree editable="top">
                                         <field name="name"/>
-                                        <field name="product_id"/>
+                                        <field name="product_id" domain="[('detailed_type', '=', 'product')]"/>
                                         <field name="quantity"/>
                                     </tree>
                                 </field>
