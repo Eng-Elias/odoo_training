@@ -1,7 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_order_meal_user,access_order_meal_user,model_order_meal,,1,1,1,1
 access_order_meal_category_user,access_order_meal_category_user,model_order_meal_category,,1,1,1,1
-access_meal_order_user,access_meal_order_user,model_meal_order,,1,1,1,1
 access_order_tag_user,access_order_tag_user,model_order_tag,,1,1,1,1
 access_meal_ingredient_user,access_meal_ingredient_user,model_meal_ingredient,,1,1,1,1
 access_order_item_user,order_item_access,model_order_item,,1,1,1,1
@@ -10,3 +9,6 @@ access_feedback_reason_user,feedback_reason_access,model_feedback_reason,,1,1,1,
 access_external_item_user,external_item_access,model_external_item,,1,1,1,1
 access_external_items_user,external_items_access,model_external_items,,1,1,1,1
 access_external_item_wizard_user,external_item_wizard,model_external_item_wizard,,1,1,1,1
+
+access_meal_order_user,access_meal_order_user,model_meal_order,tech_order.tech_order_user,1,1,1,0
+access_meal_order_mgr,access_meal_order_mgr,model_meal_order,tech_order.tech_order_mgr,1,1,1,1

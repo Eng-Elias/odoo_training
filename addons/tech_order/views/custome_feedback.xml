@@ -42,7 +42,8 @@
 
         <menuitem name="Feedback" id="customer_feedback_menu"
         parent="tech_order.order_base_menu"
-        action="tech_order.customer_feedback_window_action"/>
+        action="tech_order.customer_feedback_window_action"
+        groups="tech_order.tech_order_mgr"/>
 
     </data>
 </odoo>

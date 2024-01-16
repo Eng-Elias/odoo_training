@@ -18,6 +18,7 @@ class FeedbackReason(models.TransientModel):
     def add_reason(self):
         feedback_id = self.env['customer.feedback'].browse(self.env.context.get('active_id'))
         _logger.error("feedback_id +++ " + str(feedback_id))
-        feedback_id.state = 'rejected'
-        feedback_id.reason = self.reason
+        # feedback_id.state = 'rejected'
+        # feedback_id.reason = self.reason
+        feedback_id.update({'state': 'rejected', 'reason': self.reason})
         # customer.feedback(3, )

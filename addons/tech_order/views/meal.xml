@@ -55,7 +55,7 @@
                             </group>
                             <group>
                                 <field name="category_id"/>
-                                <field name="price"/>
+                                <field name="price" groups="tech_order.tech_order_mgr"/>
                             </group>
                         </group>
                         <notebook>
@@ -93,7 +93,7 @@
 
 <!--        menuitem == <record id="...." model="ir.ui.menuitem">-->
         <menuitem name="Orders" id="order_base_menu"
-                  web_icon="tech_order,static/src/img/icon.png"/>
+                  web_icon="tech_order,static/src/img/icon.png" groups="tech_order.tech_order_user"/>
         <menuitem name="Meals" id="order_base_meal_menu"
                   parent="tech_order.order_base_menu"
                   sequence="20"/>

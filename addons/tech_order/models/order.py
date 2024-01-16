@@ -17,7 +17,8 @@ class MealOrder(models.Model):
                             string="Type", default="internal")
 
     order_date = fields.Date("Order Date", readonly=False)#, default=fields.datetime.now().date()
-    total_price = fields.Float(string="Total Price", readonly=True, default=0)
+    total_price = fields.Float(string="Total Price", readonly=True, default=0,
+                               groups="tech_order.tech_order_mgr")
     note = fields.Text("Note")
     expected_duration = fields.Float("Expected Duration")
     customer_id = fields.Many2one('res.partner', "Customer", ondelete='restrict', domain=customer_domain)#[('is_company', '=', True)])
@@ -97,6 +98,7 @@ class MealOrder(models.Model):
         # internal and table_umber == 0
         # )
         ########
+        # self.env.user.has_group('')
         orders = self.search([('state', 'in', ('confirmed', 'in_process')),
                               '|', '&', ('type', '=', 'external'), ('expected_date', '<', datetime.now()),
                               '&', ('type', '=', 'internal'), ('table_number', '=', 0)]) #, limit=3, order_by='id'

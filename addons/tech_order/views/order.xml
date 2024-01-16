@@ -79,6 +79,11 @@
                                         <field name="total_price" />
                                     </tree>
                                 </field>
+                                 <group col="6" >
+                                        <group  colspan="2">
+                                            <field name="total_price" readonly="1"/>
+                                        </group>
+                                 </group>
                             </page>
                             <page string="External Item">
                                 <field name="external_item_ids">
