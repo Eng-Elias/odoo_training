@@ -1,6 +1,7 @@
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 from datetime import date, datetime, timedelta
+
 
 
 class MealOrder(models.Model):
@@ -19,7 +20,7 @@ class MealOrder(models.Model):
     order_date = fields.Date("Order Date", readonly=False)#, default=fields.datetime.now().date()
     total_price = fields.Float(string="Total Price", readonly=True, default=0,
                                groups="tech_order.tech_order_mgr")
-    note = fields.Text("Note")
+    note = fields.Text("Note", translate=True)
     expected_duration = fields.Float("Expected Duration")
     customer_id = fields.Many2one('res.partner', "Customer", ondelete='restrict', domain=customer_domain)#[('is_company', '=', True)])
     table_number = fields.Integer("Table Number")
@@ -64,7 +65,13 @@ class MealOrder(models.Model):
     @api.constrains('order_date')
     def check_order_date(self):
         if self.order_date and self.order_date > datetime.now().date():
-            raise ValidationError("Order Date Must be in present or past")
+            raise ValidationError(_("Order Date Must be in present or past"))
+
+    @api.constrains('table_number')
+    def check_table_number(self):
+        max_table_number = self.env['ir.config_parameter'].sudo().get_param('tech_order.max_table_number')
+        if self.table_number > int(max_table_number):
+            raise ValidationError("Max Table Number is " + str(max_table_number))
 
     def action_confirm(self):
         self.state = 'confirmed'

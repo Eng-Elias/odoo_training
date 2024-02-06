@@ -22,5 +22,19 @@
                 </xpath>
             </field>
         </record>
+
+
+         <record id="action_order_configuration" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'tech_order'}</field>
+        </record>
+
+        <menuitem id="menu_order_config" name="Settings" parent="tech_order.order_base_menu"
+            sequence="100" action="action_order_configuration" groups="base.group_system"/>
+
     </data>
 </odoo>

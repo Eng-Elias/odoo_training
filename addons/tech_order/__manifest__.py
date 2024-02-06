@@ -38,6 +38,7 @@
             'data/server_action.xml',
             'data/scheduale_action.xml',
             'data/sequence.xml',
+            'reports/order_report.xml',
 
     ],
 
