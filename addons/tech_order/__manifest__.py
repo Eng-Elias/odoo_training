@@ -25,6 +25,7 @@
     'data': [
             'security/security.xml',
             'security/ir.model.access.csv',
+            'views/res_config_settings.xml',
             'views/meal.xml',
             'wizard/feedback_reason.xml',
             'wizard/external_items.xml',
@@ -33,8 +34,10 @@
             'views/meal_ingredient.xml',
             'views/order_item.xml',
             'views/custome_feedback.xml',
+            'views/res_partner.xml',
             'data/server_action.xml',
             'data/scheduale_action.xml',
+            'data/sequence.xml',
 
     ],
 

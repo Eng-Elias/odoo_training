@@ -12,7 +12,7 @@ class MealOrder(models.Model):
         customers = self.env['res.partner'].search([('is_company', '=', True)])
         return [('id', 'in', customers.ids)]
 
-    name = fields.Char("Name", copy=False)
+    name = fields.Char("Name", copy=False, default="New")
     type = fields.Selection([('internal', 'Internal'), ('external', 'External')],
                             string="Type", default="internal")
 
@@ -84,6 +84,12 @@ class MealOrder(models.Model):
             if expected_date == datetime.now().date():
                 order.is_urgent = True
 
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('order_meal_name_seq')
+        return super(MealOrder, self).create(vals)
+
     def fetch_order(self):
         # user = self.env.user
         # rec = self.env.ref('tech_order.model_meal_order')
@@ -132,3 +138,13 @@ class MealOrder(models.Model):
         #Confirm --> In Process, Cancel
         #In Process --> Delivered
         #Delivered --> X
+
+    # #1
+        # @api.model_create_multi
+        # def create(self, vals_list):
+          # return list_of_object
+
+    # #2
+    # @api.model
+    # def create(self, vals):
+    #     return object
