@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api, exceptions
 
 
 class Commission(models.Model):
@@ -26,6 +26,18 @@ class CommissionLine(models.Model):
     from_value = fields.Float(string="From Value", required=True)
     to_value = fields.Float(string="To Value", required=True)
     percentage = fields.Float(string="Percentage", required=True)
+
+    @api.constrains('from_value', 'to_value')
+    def check_overlap(self):
+        for record in self:
+            domain = [('id', '!=', record.id),
+                      ('commission_id', '=', record.commission_id.id),
+                      '|',
+                      '&', ('from_value', '>=', record.from_value), ('from_value', '<=', record.to_value),
+                      '&', ('to_value', '>=', record.from_value), ('to_value', '<=', record.to_value)]
+            overlapping_lines = self.search(domain)
+            if overlapping_lines:
+                raise exceptions.ValidationError("Ranges cannot overlap in commission lines.")
 
 
 class CommissionLineProduct(models.Model):
