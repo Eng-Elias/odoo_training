@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="sales_person_commission_partner_form_view" model="ir.ui.view">
+            <field name="name">sales_person.commission.partner.form.view</field>
+            <field name="model">commission.partner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="commission_id"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_partner_tree_view" model="ir.ui.view">
+            <field name="name">sales_person.commission.partner.tree.view</field>
+            <field name="model">commission.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="commission_id"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_partner_window_action" model="ir.actions.act_window">
+            <field name="name">Commission Partner</field>
+            <field name="res_model">commission.partner</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--Menu-->
+        <menuitem name="Commission Partner" id="commission_partner_base_menu"
+                  parent="sales_person.sales_person_base_menu"
+                  action="sales_person_commission_partner_window_action"/>
+    </data>
+</odoo>
