@@ -26,6 +26,7 @@ Long description of module's purpose
         'views/views.xml',
         'views/templates.xml',
         'views/commission.xml',
+        'views/commission_line.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

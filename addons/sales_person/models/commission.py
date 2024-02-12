@@ -16,3 +16,13 @@ class Commission(models.Model):
 
     def action_rejected(self):
         self.state = 'rejected'
+
+
+class CommissionLine(models.Model):
+    _name = 'sales_person.commission.line'
+    _description = 'Sales Person Commission Line'
+
+    commission_id = fields.Many2one('sales_person.commission', string="Commission", required=True)
+    from_value = fields.Float(string="From Value", required=True)
+    to_value = fields.Float(string="To Value", required=True)
+    percentage = fields.Float(string="Percentage", required=True)

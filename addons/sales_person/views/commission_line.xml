@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="sales_person_commission_line_form_view" model="ir.ui.view">
+            <field name="name">sales_person.commission_line.form.view</field>
+            <field name="model">sales_person.commission.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="commission_id"/>
+                                <field name="percentage"/>
+                            </group>
+                            <group>
+                                <field name="from_value"/>
+                                <field name="to_value"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_line_tree_view" model="ir.ui.view">
+            <field name="name">sales_person.commission_line.tree.view</field>
+            <field name="model">sales_person.commission.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="commission_id"/>
+                    <field name="percentage"/>
+                    <field name="from_value"/>
+                    <field name="to_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_line_window_action" model="ir.actions.act_window">
+            <field name="name">Commission Line</field>
+            <field name="res_model">sales_person.commission.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--Menu-->
+        <menuitem name="Commission Lines" id="commission_line_base_menu"
+                  parent="sales_person.sales_person_base_menu"
+                  action="sales_person_commission_line_window_action"/>
+    </data>
+</odoo>
