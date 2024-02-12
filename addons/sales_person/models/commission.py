@@ -26,3 +26,13 @@ class CommissionLine(models.Model):
     from_value = fields.Float(string="From Value", required=True)
     to_value = fields.Float(string="To Value", required=True)
     percentage = fields.Float(string="Percentage", required=True)
+
+
+class CommissionLineProduct(models.Model):
+    _name = 'commission.line.product'
+    _description = 'Sales Person Commission Line Product'
+
+    _rec_name = 'product_id'
+
+    commission_line_id = fields.Many2one('sales_person.commission.line', string="Commission Line Product", required=True)
+    product_id = fields.Many2one('product.product', 'Product', ondelete="restrict")

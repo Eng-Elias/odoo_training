@@ -18,7 +18,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'product'],
 
     # always loaded
     'data': [
@@ -27,6 +27,7 @@ Long description of module's purpose
         'views/templates.xml',
         'views/commission.xml',
         'views/commission_line.xml',
+        'views/commission_line_product.xml',
         'views/commission_partner.xml',
     ],
     # only loaded in demonstration mode

@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_commission_user,access_commission_user,model_sales_person_commission,,1,1,1,1
 access_commission_line_user,access_commission_line_user,model_sales_person_commission_line,,1,1,1,1
+access_commission_line_product_user,access_commission_line_product_user,model_commission_line_product,,1,1,1,1
 access_commission_partner_user,access_commission_partner_user,model_commission_partner,,1,1,1,1

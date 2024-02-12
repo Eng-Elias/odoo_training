@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="sales_person_commission_line_product_form_view" model="ir.ui.view">
+            <field name="name">commission.line.product.form.view</field>
+            <field name="model">commission.line.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="commission_line_id"/>
+                            <field name="product_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_line_product_tree_view" model="ir.ui.view">
+            <field name="name">commission.line.product.tree.view</field>
+            <field name="model">commission.line.product</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="commission_line_id"/>
+                    <field name="product_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_line_product_window_action" model="ir.actions.act_window">
+            <field name="name">Commission Line Product</field>
+            <field name="res_model">commission.line.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--Menu-->
+        <menuitem name="Commission Lines Product" id="commission_line_product_base_menu"
+                  parent="sales_person.sales_person_base_menu"
+                  action="sales_person_commission_line_product_window_action"/>
+    </data>
+</odoo>
