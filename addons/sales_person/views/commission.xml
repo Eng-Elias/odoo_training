@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <record id="sales_person_commission_form_view" model="ir.ui.view">
+            <field name="name">sales_person.commission.form.view</field>
+            <field name="model">sales_person.commission</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Confirm" name="action_confirm" type="object" class="btn-primary"
+                        invisible="state != 'draft'"/>
+                        <button name="action_rejected" string="Reject" type="object" class="oe_highlight"
+                        invisible="state not in ('draft', 'confirmed')"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                            </group>
+                            <group>
+                                <field name="target"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_tree_view" model="ir.ui.view">
+            <field name="name">sales_person.commission.tree.view</field>
+            <field name="model">sales_person.commission</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="target"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sales_person_commission_window_action" model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">sales_person.commission</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--Menu-->
+        <menuitem name="Sales Person" id="sales_person_base_menu"/>
+        <menuitem name="Commissions" id="commission_base_menu"
+                  parent="sales_person.sales_person_base_menu"
+                  action="sales_person_commission_window_action"/>
+    </data>
+</odoo>
